@@ -31,7 +31,7 @@ const ItemScreen: React.FC<IProps> = (props: IProps,{navigation}) => {
                         Caffeinated:{"\n"}
                         Gluten Free: </Text>             
             </View>
-            <View style={GlobalStyles.container}>
+            <View style={GlobalStyles.footer}>
                 <TouchableOpacity onPress={()=>navigation.push('Edit')}>
                     <Text>Edit or Delete Item</Text>
                 </TouchableOpacity>

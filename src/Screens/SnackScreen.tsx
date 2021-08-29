@@ -6,7 +6,7 @@ const SnackScreen=({navigation})=> {
     return (
         <View style={GlobalStyles.container}>
             <Text>Snack Screen</Text>
-            <View style={GlobalStyles.container}>
+            <View style={GlobalStyles.footer}>
                 <TouchableOpacity onPress={()=>navigation.push('Edit')}>
                     <Text>Edit or Delete Snack</Text>
                 </TouchableOpacity>

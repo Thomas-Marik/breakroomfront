@@ -14,9 +14,10 @@ const AddItemScreen=({navigation})=> {
                         Caffeinated:{"\n"}
                         Gluten Free: </Text>             
             </View>
-        <View style={GlobalStyles.container}>
+        <View style={GlobalStyles.footer}>
             <TouchableOpacity onPress={()=>{
-                navigation.popToTop()
+                AddItem();
+                navigation.popToTop();
             }}>
             <Text>Add item</Text>
             </TouchableOpacity>

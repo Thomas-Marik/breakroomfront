@@ -45,17 +45,17 @@ const SodaScreen: React.FC<IProps> =(props:IProps,{navigation})=> {
     return (
         <View style={GlobalStyles.container}>
            <FlatList
-                numColumns={3}
+                numColumns={1}
                keyExtractor={(item)=>item.brandName}
                 data={itemList}
                 renderItem={({item})=>(
                     <TouchableOpacity>
-                        <Text style={GlobalStyles.listItem}>{item.brandName}{"\n"}{`Type: ${item.type}`}</Text>
+                        <Text style={GlobalStyles.listItem}>{item.brandName}</Text>
                     </TouchableOpacity>
                 )}
                 
                 /> 
-            <View style={GlobalStyles.container}>
+            <View style={GlobalStyles.footer}>
                 <TouchableOpacity onPress={()=>navigation.push('Edit')}>
                     <Text>Edit/Delete</Text>
                 </TouchableOpacity>

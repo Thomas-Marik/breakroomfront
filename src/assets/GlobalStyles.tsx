@@ -8,10 +8,16 @@ const GlobalStyles = StyleSheet.create({
         justifyContent:"center"
     },
     listItem:{
-        height:300,
-        width:300,
+        height:100,
+        width:100,
         backgroundColor:"green",
-        color:"white"
+        color:"white",
+        margin:10
+    },
+    footer:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        
     }
 })
 export default GlobalStyles
