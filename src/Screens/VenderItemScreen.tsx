@@ -3,6 +3,10 @@ import {View, Text, TouchableOpacity, FlatList}from 'react-native'
 import GlobalStyles from '../assets/GlobalStyles'
 
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllItems } from '../redux/actions/items'
+import { IAppState } from '../redux/state'
+
 interface IProps{
    
     brandName:string,
@@ -21,25 +25,17 @@ interface IProps{
    
  
 
-const SodaScreen: React.FC<IProps> =(props:IProps,{navigation})=> {
+const VenderItemScreen =({navigation, route})=> {
 
-    const[itemList, setItemList]= useState([{
-        brandName: "",
-        type:""
-
-    }]);
+   const dispatch = useDispatch()
+   const itemList = useSelector((state:any)=>state.items.itemList)
     
-  const fetchSodas = async () => {
-    const res = await axios.get(`api/sodas/all}`);
-    setItemList(res.data);
-  };
+  const fetchItems = async () => {dispatch(getAllItems())}
+    
+
 
   React.useEffect(() => {
-    fetchSodas();
-
-    return function cleanup() {
-      setItemList([]);
-    };
+    fetchItems();   
   }, []);
 
     return (
@@ -50,20 +46,19 @@ const SodaScreen: React.FC<IProps> =(props:IProps,{navigation})=> {
                 data={itemList}
                 renderItem={({item})=>(
                     <TouchableOpacity>
-                        <Text style={GlobalStyles.listItem}>{item.brandName}</Text>
+                        <Text style={GlobalStyles.listItem} onPress={()=>navigation.push('View',item)}>{item.brandName}</Text>
                     </TouchableOpacity>
                 )}
                 
                 /> 
             <View style={GlobalStyles.footer}>
-                <TouchableOpacity onPress={()=>navigation.push('Edit')}>
-                    <Text>Edit/Delete</Text>
-                </TouchableOpacity>
+              
                 <TouchableOpacity  onPress={()=>navigation.push('Add')}>
-                    <Text>Add a Soda</Text>
+                    <Text style={GlobalStyles.button}>Add an Item </Text>
                 </TouchableOpacity>
             </View>
+            <View></View>
         </View>
     )
 }
-export default SodaScreen
+export default VenderItemScreen

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import GlobalStyles from '../assets/GlobalStyles'
 import {View, Text, TouchableOpacity} from 'react-native'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { stockItem } from '../redux/actions/items'
 interface IProps{
    
     brandName:string,
@@ -12,32 +14,30 @@ interface IProps{
     caffeine:boolean,
     glutenFree:boolean
 }
-
-
-
-
-const ItemScreen: React.FC<IProps> = (props: IProps,{navigation}) => {
+const ItemScreen = ({navigation,route}) => {
    
- 
+ const dispatch = useDispatch()
 
     return (
         <View style={GlobalStyles.container}>
-            <View style={GlobalStyles.container}>
-                <Text>Brand Name:{"\n"}
-                        Type:{"\n"}
-                        Distrinutor:{"\n"}
-                        Diet:{"\n"}
-                        Calories/Serving:{"\n"}
-                        Caffeinated:{"\n"}
-                        Gluten Free: </Text>             
+            <View style={GlobalStyles.display}>
+                <Text style={GlobalStyles.test}>Brand Name:  {route.params.brandName}{"\n"}{"\n"}
+                        Type:  {route.params.type}{"\n"}{"\n"}
+                        Distributor:  {route.params.distributor}{"\n"}{"\n"}
+                        Diet:  {route.params.diet.toString()}{"\n"}{"\n"}
+                        Calories/Serving:  {route.params.caloriesPerServing}{"\n"}{"\n"}
+                        Caffeinated:  {route.params.caffeine.toString()}{"\n"}{"\n"}
+                        Gluten Free:  {route.params.glutenFree.toString()} </Text>       
             </View>
             <View style={GlobalStyles.footer}>
-                <TouchableOpacity onPress={()=>navigation.push('Edit')}>
-                    <Text>Edit or Delete Item</Text>
+                <TouchableOpacity onPress={()=>navigation.push('Edit', route.params)}>
+                    <Text style={GlobalStyles.button}>Edit or Delete Item</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>{                    
+                <TouchableOpacity onPress={()=>{  
+                                  
+                                  dispatch(stockItem(route.params))
                     navigation.popToTop()}}>
-                    <Text>Add to Vending Machine</Text>
+                    <Text style={GlobalStyles.button}>Add to Vending Machine</Text>
                 </TouchableOpacity>
             </View>
         </View>
